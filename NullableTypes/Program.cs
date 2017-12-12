@@ -17,6 +17,35 @@ namespace NullableTypes
 
             // OK! Strings are reference types.
             string myString = null;
+
+            Console.WriteLine("***** Fun with Nullable Data *****\n");
+            DatabaseReader dr = new DatabaseReader();
+
+            int? i = dr.GetIntFromDatabase();
+
+            if (i.HasValue)
+            {
+                Console.WriteLine($"Value of 'i' is {i.Value}");
+            }
+            else
+            {
+                Console.WriteLine("Value of 'i' is undefined.");
+            }
+
+            // Get bool from "database".
+            bool? b = dr.GetBoolFromDatabase();
+
+            if(b != null)
+            {
+                Console.WriteLine($"Value of 'b' is: {b.Value}");
+            }
+            else
+            {
+                Console.WriteLine("Value of 'b' is undefined.");
+            }
+
+            Console.ReadLine();
+
         }
 
         static void LocalNullableVariables()
