@@ -44,6 +44,20 @@ namespace NullableTypes
                 Console.WriteLine("Value of 'b' is undefined.");
             }
 
+            // If the value from GetIntFromDatabase() is null,
+            // assign local variable to 100.
+            int myData = dr.GetIntFromDatabase() ?? 100;
+            Console.WriteLine($"Value of myData: {myData}");
+
+            // Long-hand notation not using ?? syntax.
+            int? moreData = dr.GetIntFromDatabase();
+            if (!moreData.HasValue)
+                moreData = 100;
+
+            Console.WriteLine($"Value of moreData: {moreData}");
+
+            TesterMethod(null);
+
             Console.ReadLine();
 
         }
@@ -69,6 +83,19 @@ namespace NullableTypes
             Nullable<bool> nullableBool = null;
             Nullable<char> nullableChar = 'a';
             Nullable<int>[] arrayOfNullableInts = new Nullable<int>[10];
+        }
+
+        static void TesterMethod(string[] args)
+        {
+            // We should check for null before accessing the array data.
+            //if(args != null)
+            //{
+            //    Console.WriteLine($"You sent me {args.Length} arguments.");
+            //}
+
+            //Console.WriteLine($"You sent me {args?.Length} arguments.");
+
+            Console.WriteLine($"You sent me {args?.Length ?? 0} arguments.");
         }
     }
 }
